@@ -80,20 +80,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        #'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'django_db',
-        #'USER': 'django',
-        #'PASSWORD': 'admin',
-        #'HOST': '192.168.71.129',
-        #'PORT': '3306'
-
-    }
-}
-
+if 'RDS_HOSTNAME' in os.environ:
+        DATABASES = {
+                'default': {
+                'ENGINE': 'django.db.backends.mysql',
+                'NAME': os.environ['kgcommerce-database'],
+                'USER': os.environ['admin'],
+                'PASSWORD': os.environ['admin123'],
+                'HOST': os.environ['kgcommerce-database.ch1vdpk4geg2.ap-northeast-2.rds.amazonaws.com'],
+                'PORT': os.environ['3306'],
+               }
+            }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

@@ -12,6 +12,7 @@ incremental==21.3.0
 isort==5.10.1
 lazy-object-proxy==1.7.1
 mccabe==0.7.0
+mysqlclient==2.1.1
 Pillow==8.4.0
 platformdirs==2.4.0
 pylint==2.13.9
@@ -22,5 +23,6 @@ tomli==1.2.3
 Twisted==22.4.0
 typed-ast==1.5.4
 typing_extensions==4.1.1
+uWSGI==2.0.21
 wrapt==1.14.1
 zope.interface==5.5.0
