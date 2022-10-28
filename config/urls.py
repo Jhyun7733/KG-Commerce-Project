@@ -10,4 +10,6 @@ urlpatterns = [
     path('acc/',include('acc.urls')),
     path('product/', include("product.urls")),
     path('live/', include("live.urls")),
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

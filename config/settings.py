@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-import pymysql
-pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,18 +81,19 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-                'default': {
-                'ENGINE': 'django.db.backends.mysql',
-                'NAME' : 'kgcommerce_project',
-                'USER': 'admin',
-                'PASSWORD': 'admin123',
-                'HOST': 'kgcommercedb-1.ch1vdpk4geg2.ap-northeast-2.rds.amazonaws.com',
-                'PORT': '3306',
-                'OPTiONS': {
-                    'init_command' : "SET sql_mode='STRICE_TRANS_TABLES'"
-               }
-            }
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.mysql',
+        #'NAME': 'django_db',
+        #'USER': 'django',
+        #'PASSWORD': 'admin',
+        #'HOST': '192.168.71.129',
+        #'PORT': '3306'
+
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -130,11 +129,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+
+
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -143,6 +140,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+STATIC_URL = '/static/'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR/"media"
+STATIC_ROOT = BASE_DIR/"static"
