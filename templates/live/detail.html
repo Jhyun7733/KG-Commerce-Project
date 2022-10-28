@@ -7,14 +7,15 @@
         <title>Insert title here</title>
         <style type="text/css">
             #fullscreen{
-            	width: fit-content;
-            	height: fit-content;
-            	background-color: grey;
+            	width: 100%;
+            	height: 1500px;
+            	
             }
             #screen1{
-            	width: 500px;
+            	width: 50%;
             	height: 600px;
-            	background-color: black;
+                box-sizing: border-box;
+            	
             	float: left;
             }
             #screen1-1{
@@ -28,108 +29,179 @@
             	background-color: yellow;
             }
             #screen2{
-            	width: 1000px;
-            	height: 1000px;
+                margin-top: 100px;
+            	width: 50%;
+            	height: auto;
             	background-color: rgb(179, 187, 181);
-            	float: left;
+            	float: right;
+                box-sizing: border-box;
+                border: 3px solid rgb(0,0,0) ;
             }
             #screen2-1{
             	width: 200px;
             	height: 200px;
-            	background-color: blue;
+            	background: #0ff;
             }
             #screen2-2{
             	width: 200px;
             	height: 400px;
             	background-color: green;
             }
+            .balloon-left {
+              position: relative;
+              display: inline-block;
+              margin: 1.5em 0 1.5em 15px;
+              padding: 7px 10px;
+              min-width: 120px;
+              max-width: 40%;
+              color: #555;
+              font-size: 16px;
+              background: #FFF;
+              border: solid 3px #555;
+              box-sizing: border-box;
+            }
+            .balloon-right {
+              position: relative;
+              display: inline-block;
+              margin: 1.5em 0 1.5em 15px;
+              padding: 7px 10px;
+              min-width: 120px;
+              max-width: 40%;
+              color: #555;
+              font-size: 16px;
+              background: #FFF;
+              border: solid 3px #555;
+              box-sizing: border-box;
+              float: right;
+            }
+            .balloon-left:before {
+              content: "";
+              position: absolute;
+              top: 50%;
+              left: -24px;
+              margin-top: -12px;
+              border: 12px solid transparent;
+              border-right: 12px solid #FFF;
+              z-index: 2;
+            }
+
+            .balloon-left:after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              left: -30px;
+              margin-top: -14px;
+              border: 14px solid transparent;
+              border-right: 14px solid #555;
+              z-index: 1;
+            }
+
+            .balloon-left p {
+              margin: 0;
+              padding: 0;
+            }
             </style>
     </head>
 
-<body>
-    <div id="fullscreen">
-    	<div id="screen1">
+
+    <body>
+        <div id="fullscreen">
+        	<div id="screen1">
 
 
-        <section class="py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="content container">
-                    <video autoplay controls loop muted poster="aaa" width="auto" height="600px" preload="bbb" src = "{{ b.getvideo }}"  type="video/mp4"></video>
-                </div>
-            <div class="col-md-6">
-                <div class="small mb-1">{{ b.cate }}</div>
-                    <h1 class="display-5 fw-bolder">{{ b.title }}</h1>
-                <div class="fs-5 mb-5">
-                    <span class="text-decoration-line-through">{{ b.price }}\</span>
-                    <span>{{ b.price }}\</span>
-                </div>
-                <p class="lead">{{ b.content }}</p>
-                <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
-                        Buy now
-                    </button>
-                    {% if user == b.seller %}
-                    <a href="{% url 'live:update' b.id %}"><button class="btn btn-dark">수정</button></a>
-                    <a href="{% url 'live:delete' b.id %}"><button class="btn btn-danger">삭제</button></a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-		</div>
-
-	</div>
-	<div id="screen2">
-       <div id="screen2-1">
-        {% if cset %}
-        <div class="row text-center">
-            
-            {% for i in cset %}
-                <div class="col-lg-4 mt-5">
-                    {% if i.viewer == b.seller %}
-                        <b style="color: rgb(35, 48, 240); "> 🐱‍🚀 {{ i.viewer }} </b>
-                    {% else %}
-                        <b>    {{ i.viewer }}   </b>
-                    {% endif %}
-                
-                </div>
-                <div class="col-lg-8 mt-5">
-                    <textarea class="form-control" style="height: 100px;" disabled>{{ i.livecomment }}</textarea>
-                    <div class="text-end mt-3">
-                        {% if i.viewer == user %}
-                            <a href="{% url 'live:dreview' b.id i.id %}" class="btn btn-danger">삭제</a>
+            <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="content container">
+                        <video autoplay controls loop muted width="auto" height="600px" preload="bbb" src = "{{ b.getvideo }}"  type="video/mp4"></video>
+                    </div>
+                <div class="col-md-6">
+                    <div class="small mb-1">{{ b.cate }}</div>
+                        <h1 class="display-6 fw-bolder">{{ b.title }}</h1>
+                        <div class="fs-5 mb-5">
+                            <span class="text-decoration-line-through">{{ b.price }}\</span>
+                            <span>{{ b.price }}\</span>
+                        </div>
+                    <p class="lead">{{ b.content }}</p>
+                    <div class="d-flex">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <i class="bi-cart-fill me-1"></i>
+                            Buy now
+                        </button>
+                        {% if user == b.seller %}
+                        <a href="{% url 'live:update' b.id %}"><button class="btn btn-dark">수정</button></a>
+                        <a href="{% url 'live:delete' b.id %}"><button class="btn btn-danger">삭제</button></a>
                         {% endif %}
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <h4>첫번째 댓글을 달아주세요 </h4>
-    {% endif %}
-		</div>
-	</div>
-
-
-	<div id="screen2-2">
-    <form method="post" action="{% url 'live:creview' b.id %}">
-        {% csrf_token %}
-        <div class="row mt-5 mb-5">
-            <div class="col-lg-10">
-                <input type="text" name="com" class="form-control">
             </div>
-            <div class="col-lg-2">
-                <button class="btn btn-dark" style="width: 100%;">댓글작성</button>
+
+    	</div>
+
+    	</div>
+    	<div id="screen2">
+            <div>
+                <div>
+            {% if cset %}
+                
+
+                {% for i in cset %}
+                    
+                        {% if i.viewer == b.seller %}
+                        <div class="row">
+                        <div class="balloon-left">
+                            <b style="color: rgb(35, 48, 240); "> 🐱판매자-{{ i.viewer }} </b>
+                            <div class="col-lg-8 mt-5">
+                                {{ i.livecomment }}
+                                <div class="text-end mt-3">
+                                    {% if i.viewer == user %}
+                                        <a href="{% url 'live:dreview' b.id i.id %}" class="btn btn-danger">삭제</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        {% else %}
+                        <div class="row">
+                        <div class="balloon-right">
+                            <b> {{ i.viewer }} </b>
+                            <div class="col-lg-8 mt-5">
+                                {{ i.livecomment }}
+                                <div class="text-end mt-3">
+                                {% if i.viewer == user %}
+                                <a href="{% url 'live:dreview' b.id i.id %}" class="btn btn-danger">삭제</a>
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        {% endif %}
+                
+                {% endfor %}
+                
+            {% else %}
             </div>
+            <h4> 채팅을 시작하세요 </h4>
+            {% endif %}
+    		</div>
+    	
+
+            <form method="post" action="{% url 'live:creview' b.id %}">
+                {% csrf_token %}
+                <div class="row mt-5 mb-5">
+                    <div class="col-lg-10">
+                        <input type="text" name="com" class="form-control">
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-dark" style="width: 100%;">전송</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+        </div>
     </div>
-
-
-</div>
-</body>
+    </body>
 </html>
 
 
