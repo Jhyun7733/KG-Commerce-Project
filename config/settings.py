@@ -81,18 +81,19 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        #'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'django_db',
-        #'USER': 'django',
-        #'PASSWORD': 'admin',
-        #'HOST': '192.168.71.129',
-        #'PORT': '3306'
+                'default': {
+                'ENGINE': 'django.db.backends.mysql',
+                'NAME' : 'kgcommerce_project',
+                'USER': 'admin',
+                'PASSWORD': 'admin123',
+                'HOST': 'kgcommercedb-1.ch1vdpk4geg2.ap-northeast-2.rds.amazonaws.com',
+                'PORT': '3306',
+                'OPTiONS': {
+                    'init_command' : "SET sql_mode='STRICE_TRANS_TABLES'"
+               }
+            }
+        }
 
-    }
-}
 
 
 # Password validation
@@ -140,7 +141,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-STATIC_URL = '/static/'
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR/"media"
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR/"static"
