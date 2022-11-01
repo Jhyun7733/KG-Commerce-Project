@@ -147,9 +147,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-AWS_ACCESS_KEY_ID = 'AKIA2YJLWNQCMN73Z353' 
-AWS_SECRET_ACCESS_KEY = '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' 
-AWS_REGION = 'ap-northeast-2'
+
 
 ###S3 Storages
 AWS_STORAGE_BUCKET_NAME = 'kgs3bucket' # 설정한 버킷 이름
