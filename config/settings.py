@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'live.apps.LiveConfig',
     'mathfilters',
+    'storages',
+    'rest_framework',
 ]
 AUTH_USER_MODEL = "acc.user"
 
@@ -142,8 +144,27 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR/"media"
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR/"static"
+
+
+
+AWS_ACCESS_KEY_ID = 'AKIA2YJLWNQCMN73Z353' 
+AWS_SECRET_ACCESS_KEY = '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' 
+AWS_REGION = 'ap-northeast-2'
+
+###S3 Storages
+AWS_STORAGE_BUCKET_NAME = 'kgs3bucket' # 설정한 버킷 이름
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME,AWS_REGION)
+AWS_S3_OBJECT_PARAMETERS = {
+            'CacheControl': 'max-age=86400',
+            }
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
+STATIC_ROOT = os.path.join(STATICFILES_STORAGE, '/static/')
+MEDIA_URL = "https://%s/media/" % AWS_S3_CUSTOM_DOMAIN
+STATIC_URL = "https://%s/static/" % AWS_S3_CUSTOM_DOMAIN
+
+
+
+
 

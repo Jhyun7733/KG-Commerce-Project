@@ -1,6 +1,6 @@
-from unicodedata import category
 from django.db import models
 from acc.models import User
+
 
 # Create your models here.
 
